@@ -1,27 +1,41 @@
 <?php
 
+
+//echo 'XHTMLTABLE';
+
+//namespace Symfony\Component;
+
+//use Aya\Yaml\Parser;
+
+use Symfony\Component\Yaml\ParserYaml;
+//use Yaml\Yaml;
+
+
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-echo 'XHTMLTABLE';
-
-
-
-//use Symfony\Component\Yaml\Yaml;
 
 //require_once '/Users/ash/Sites/Yaml/Yaml.php';
 //require_once '/Users/ash/Sites/Yaml/Parser.php';
 
-//Yaml::parse('/Users/ash/Sites/XhtmlTable/configuration.yaml');
-
 $file = '/Users/ash/Sites/XhtmlTable/configuration.yaml';
 
+if (file_exists($file)) {
+	echo 'OK';
+}
 
-require_once '/Users/ash/Sites/symfony1-1.4/lib/yaml/sfYamlParser.php';
+$array = Parser::parse($file);
 
-$oYamlParser = new sfYamlParser();
-$aConf = $oYamlParser->parse($file);
+print_r($array);
 
-print_r($oYamlParser);
+
+// require_once '/Users/ash/Sites/symfony1-1.4/lib/yaml/sfYamlParser.php';
+
+// $oYamlParser = new sfYamlParser();
+// $aConf = $oYamlParser->parse($file);
+
+// print_r($oYamlParser);
+// print_r($aConf);
 
 
 require_once 'XhtmlTable.php';
