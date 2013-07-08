@@ -1,0 +1,16 @@
+id: Person
+cols:
+  idx:
+    type: idx
+  name:
+    type: link
+    tiyle: some text to click
+  title:
+    type: text
+  description:
+    truncate: true
+  status:
+    type: tag
+    value: VAL
+  order:
+    value: ORDERs
