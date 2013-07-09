@@ -26,7 +26,7 @@ if (file_exists($file)) {
 
 $array = Parser::parse($file);
 
-print_r($array);
+print_r($array)	;
 
 
 // require_once '/Users/ash/Sites/symfony1-1.4/lib/yaml/sfYamlParser.php';
