@@ -23,8 +23,16 @@ class AyaXhtmlTable {
         
     }
     
-    public function configure() {
+    public function configure($aConfig) {
+        //$this->_aCon
 
+        require_once './AyaXhtmlTableCell.php';
+
+        foreach ($aConfig['cells'] as $cells => $cell) {
+            $aCells[$cells] = new AyaXhtmlTableCell();
+
+            $aCells[$cells]->configure($cell);
+        }
     }
     
     public function assign($aDataset) {
@@ -41,8 +49,8 @@ class AyaXhtmlTable {
         $s .= '</head>';
         foreach ($this->_aDataset as $rows) {
             $s .= '<tr>';
-            foreach ($rows as $cols) {
-                $s .= '<td>'.$cols.'</td>';
+            foreach ($aCells as $cell) {
+                $s .= $cell->render();
             }
             $s .= '</tr>';
         }
