@@ -1,33 +1,31 @@
 <?php
 
-
-//echo 'XHTMLTABLE';
-
 //namespace Symfony\Component;
 
 //use Aya\Yaml\Parser;
 
-use Symfony\Component\Yaml\ParserYaml;
+//use Symfony\Component\Yaml\Parser;
 //use Yaml\Yaml;
-
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
-//require_once '/Users/ash/Sites/Yaml/Yaml.php';
+define('ROOT_DIR', __DIR__);
+
+//require_once '/Users/ash/Sites/XhtmlTable/vendor/yaml/sfYamlParser.php';
 //require_once '/Users/ash/Sites/Yaml/Parser.php';
 
-$file = '/Users/ash/Sites/XhtmlTable/configuration.yaml';
+require_once ROOT_DIR . '/vendor/yaml/sfYamlParser.php';
 
-if (file_exists($file)) {
-	echo 'OK';
-}
+//$file = '/Users/ash/Sites/XhtmlTable/configuration.yaml';
 
-$array = Parser::parse($file);
+$file = ROOT_DIR . '/configuration.yaml';
 
-print_r($array)	;
+$oConf = new sfYamlParser();
+$aDataset = $oConf->parse(file_get_contents($file));
 
+//print_r($aDataset);
 
 // require_once '/Users/ash/Sites/symfony1-1.4/lib/yaml/sfYamlParser.php';
 
@@ -38,7 +36,17 @@ print_r($array)	;
 // print_r($aConf);
 
 
-require_once 'XhtmlTable.php';
+// package('Aya.Xhtml.Table');
 
-$oTable = new XhtmlTable();
+require_once 'AyaXhtmlTable.php';
+
+
+
+$oTable = new AyaXhtmlTable();
+
+$oTable->configure();
+
+$oTable->assign($aDataset);
+
+echo $oTable->render();
 
