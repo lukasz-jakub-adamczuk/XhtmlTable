@@ -59,7 +59,7 @@ class AyaXhtmlTable {
             }
             
             // configuring cell
-            $this->_aCells[$cols]->configure($col);
+            $this->_aCells[$cols]->configure($cols, $col);
         }
     }
     

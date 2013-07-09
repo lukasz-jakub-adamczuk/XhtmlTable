@@ -1,3 +1,12 @@
-- [aaa, bbb, ccc]
-- [no to pochowac przynajmniej, teraz jest tak ze widac, a nie powinno]
-- [jeszcze, jeden, element]
+0:
+  title: aaa
+  order: bbb
+  idx: ccc
+1:
+  name: no to pochowac przynajmniej
+  description: teraz jest tak ze widac
+  status: a nie powinno
+2:
+  title: jeszcze
+  status: jeden
+  order: element

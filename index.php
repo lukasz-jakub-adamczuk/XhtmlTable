@@ -29,5 +29,7 @@ $oTable->configure($aConfig);
 
 $oTable->assign($aDataset);
 
+//print_r($oTable);
+
 echo $oTable->render();
 
