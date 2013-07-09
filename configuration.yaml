@@ -1,16 +1,16 @@
 id: Person
-cols:
 rows:
-cells:
+cols:
   idx:
     type: idx
   name:
     type: link
-    tiyle: some text to click
+    title: some text to click
   title:
     type: text
   description:
     truncate: true
+    value: AAA
   status:
     type: tag
     value: VAL

@@ -10,6 +10,8 @@ class AyaXhtmlTable {
     private $_aRows;
     
     private $_aCols;
+    
+    private $_aCells;
 
     private $_aDataset;
     
@@ -24,14 +26,40 @@ class AyaXhtmlTable {
     }
     
     public function configure($aConfig) {
-        //$this->_aCon
-
-        require_once './AyaXhtmlTableCell.php';
-
-        foreach ($aConfig['cells'] as $cells => $cell) {
-            $aCells[$cells] = new AyaXhtmlTableCell();
-
-            $aCells[$cells]->configure($cell);
+        //
+        
+        // require parent class
+        require_once dirname(__FILE__) . '/AyaXhtmlTableCell.php';
+        
+        // listing required classes
+        foreach ($aConfig['cols'] as $cols => $col) {
+            $sCellType = (isset($col['type']) ? $col['type'] : 'text');
+            $aClasses[$sCellType] = 'AyaXhtmlTableCell'.ucfirst($sCellType);
+        }
+        
+        // including required classes
+        foreach ($aClasses as $sCellName) {
+            if (!class_exists($sCellName, false)) {
+                if (file_exists(dirname(__FILE__) . '/'.$sCellName.'.php')) {
+                    require_once dirname(__FILE__) . '/'.$sCellName.'.php';   
+                }
+            }
+        }
+        
+        foreach ($aConfig['cols'] as $cols => $col) {
+            // naming
+            $sCellType = (isset($col['type']) ? $col['type'] : 'text');
+            $sCellName = 'AyaXhtmlTableCell'.ucfirst($sCellType);
+            
+            // creating
+            if (class_exists($sCellName, false)) {
+                $this->_aCells[$cols] = new $sCellName(str_replace(' ', '', ucwords(str_replace('-', ' ', $this->_sId))));
+            } else {
+                $this->_aCells[$cols] = new AyaXhtmlTableCellText(str_replace(' ', '', ucwords(str_replace('-', ' ', $this->_sId))));
+            }
+            
+            // configuring cell
+            $this->_aCells[$cols]->configure($col);
         }
     }
     
@@ -41,22 +69,24 @@ class AyaXhtmlTable {
     
     public function render() {
         $s = '<table>';
+        // thead
         $s .= '<thead>';
-        $s .= '<tr>';
-        $s .= '<td>A</td><td>B</td><td>C</td>';
-        $s .= '</tr>';
-
-        $s .= '</head>';
-        foreach ($this->_aDataset as $rows) {
             $s .= '<tr>';
-            foreach ($aCells as $cell) {
-                $s .= $cell->render();
+            $s .= '<td>A</td><td>B</td><td>C</td>';
+            $s .= '</tr>';
+        $s .= '</head>';
+        // tfoot
+        $s .= '<tfoot>';
+        $s .= '</tfoot>';
+        // tbody
+        $s .= '<tbody>';
+        foreach ($this->_aDataset as $rows => $row) {
+            $s .= '<tr>';
+            foreach ($this->_aCells as $cell) {
+                $s .= $cell->render($row);
             }
             $s .= '</tr>';
         }
-        $s .= '<tfoot>';
-        $s .= '</tfoot>';
-        $s .= '<tbody>';
         $s .= '</tbody>';
         $s .= '</table>';
         return $s;
