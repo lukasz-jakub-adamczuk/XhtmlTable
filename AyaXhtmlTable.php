@@ -14,6 +14,8 @@ class AyaXhtmlTable {
     private $_aCells;
 
     private $_aDataset;
+
+    private $_aTexts;
     
     private $_sLang = 'pl';
     
