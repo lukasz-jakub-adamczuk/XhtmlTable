@@ -2,17 +2,33 @@
 
 abstract class AyaXhtmlTableCell {
 
-    private $_sKey;
+    protected $_sKey;
     
-    private $_sType = 'text';
+    protected $_sType = 'text';
     
-    private $_sValue;
+    protected $_sValue;
+    
+    protected $_sDefault;
+    
+    protected $_sFormat;
+    
+    // cell attrs
+    protected $_sSortLink;
+    
+    protected $_sWidth;
+    
+    protected $_sAlign = 'left';
+    
+    protected $_sClass;
 
-    private $_sAlign;
+    protected $_sTitle;
 
-    private $_sTitle;
-
-    private $_sAAA;
+    // cell props
+    protected $_bEscape = false;
+    
+    protected $_bVisible = true;
+    
+    protected $_bSortable = true;
     
     public function __construct() {
 
@@ -27,6 +43,37 @@ abstract class AyaXhtmlTableCell {
             $this->_sValue = 'Unknown';
         }
         
+    }
+    
+    public function isVisible() {
+        return $this->_bVisible;
+    }
+    
+    /* setters */
+
+    public function setValue($sValue) {
+        $this->_sValue = $sValue;
+    }
+    
+    public function setClass($sClass) {
+        $this->_sClass = $sClass;
+    }
+    
+    /* getters */
+    
+    public function getValue() {
+        return $this->_sValue;
+    }
+    
+    /* renders */
+    
+    public function renderHeadCell() {
+    }
+    
+    public function renderFootCell() {
+    }
+    
+    protected function _renderElement() {
     }
 
     public function render($aRow) {

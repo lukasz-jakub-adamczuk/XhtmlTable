@@ -1,12 +1,45 @@
 0:
-  title: aaa
-  order: bbb
-  idx: ccc
+  name: aaa
+  title: Some short text
+  desc: Little bit longer text...
+  today: 10
+  tommorow: 20
+  yesterday: 30
+  status: ok
+  order: 4
+  deleted: 1
+  delete_date: 2012-01-04
 1:
-  name: no to pochowac przynajmniej
-  description: teraz jest tak ze widac
-  status: a nie powinno
+  name: bbb
+  title: Let it be
+  desc: Show me what you got
+  today: 44
+  tommorow: 22
+  yesterday: 66
+  status: not
+  order: 2
+  deleted: 1
+  delete_date: 2013-09-12
 2:
-  title: jeszcze
-  status: jeden
-  order: element
+  name: ccc
+  title: Tell me if you want
+  desc: And there were they three...
+  today: 33
+  tommorow: 66
+  yesterday: 99
+  status: ok
+  order: 14
+  deleted: 0
+  delete_date: 2000-11-05
+3:
+  name: ddd
+  title: No no no
+  desc: Catch me if you can
+  today: 1
+  tommorow: 10
+  yesterday: 100
+  status: maybe
+  order: 9
+  deleted: 1
+  delete_date: 2092-03-01
+

@@ -8,11 +8,16 @@ cols:
     title: some text to click
   title:
     type: text
-  description:
+  desc:
     truncate: true
     value: AAA
+  today:
+  tomorrow:
+  yesterday:
   status:
     type: tag
     value: VAL
   order:
     value: ORDERs
+  deleted:
+  delete_date:

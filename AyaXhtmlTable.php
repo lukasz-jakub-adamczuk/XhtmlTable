@@ -74,7 +74,11 @@ class AyaXhtmlTable {
         // thead
         $s .= '<thead>';
             $s .= '<tr>';
-            $s .= '<td>A</td><td>B</td><td>C</td>';
+            foreach ($this->_aCells as $cell) {
+                if ($cell->isVisible()) {
+                    $s .= $cell->renderHeadCell();
+                }
+            }
             $s .= '</tr>';
         $s .= '</head>';
         // tfoot
