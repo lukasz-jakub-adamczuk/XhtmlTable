@@ -3,7 +3,7 @@
   title: Some short text
   desc: Little bit longer text...
   today: 10
-  tommorow: 20
+  tomorrow: 20
   yesterday: 30
   status: ok
   order: 4
@@ -14,7 +14,7 @@
   title: Let it be
   desc: Show me what you got
   today: 44
-  tommorow: 22
+  tomorrow: 22
   yesterday: 66
   status: not
   order: 2
@@ -25,7 +25,7 @@
   title: Tell me if you want
   desc: And there were they three...
   today: 33
-  tommorow: 66
+  tomorrow: 66
   yesterday: 99
   status: ok
   order: 14
@@ -36,7 +36,7 @@
   title: No no no
   desc: Catch me if you can
   today: 1
-  tommorow: 10
+  tomorrow: 10
   yesterday: 100
   status: maybe
   order: 9

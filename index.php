@@ -31,5 +31,9 @@ $oTable->assign($aDataset);
 
 //print_r($oTable);
 
+echo '<style>';
+echo file_get_contents(ROOT_DIR . '/tables.css');
+echo '</style>';
+
 echo $oTable->render();
 

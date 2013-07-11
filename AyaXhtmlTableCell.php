@@ -33,6 +33,10 @@ abstract class AyaXhtmlTableCell {
     public function __construct() {
 
     }
+    
+    protected function _beforeConfigure() {}
+    
+    protected function _afterConfigure(&$aParams) {}
 
     public function configure($sKey, $aParams) {
         $this->_sKey = $sKey;
@@ -43,6 +47,40 @@ abstract class AyaXhtmlTableCell {
             $this->_sValue = 'Unknown';
         }
         
+        // default values (if not comes from params)
+        $this->_beforeConfigure();
+        
+        // set all what comes from params
+        if (isset($aParams)) {
+            foreach ($aParams as $params => $param) {
+                $this->set($params, $param);
+            }
+        }
+        
+        // overidden values (if comes from params)
+        $this->_afterConfigure($aParams);
+        
+    }
+    
+    public function set($sName, $mValue) {
+        $aPrefixes = array('s', 'b', 'a', 'i', 'd', 'm');
+        foreach ($aPrefixes as $prefixes => $prefix) {
+            $sProperty = '_'.$prefix.ucfirst($sName);
+            if (property_exists(get_class($this), $sProperty)) {
+                $this->$sProperty = $mValue;
+                return true;
+            }
+        }
+    }
+    
+    public function get($sName, $sDefault = null) {
+        $aPrefixes = array('s', 'b', 'a', 'i', 'd', 'm');
+        foreach ($aPrefixes as $prefixes => $prefix) {
+            $sProperty = '_'.$prefix.ucfirst($sName);
+            if (property_exists(get_class($this), $sProperty)) {
+                return $this->$sProperty;
+            }
+        }
     }
     
     public function isVisible() {
@@ -68,6 +106,7 @@ abstract class AyaXhtmlTableCell {
     /* renders */
     
     public function renderHeadCell() {
+        return '<th>'.$this->_sKey.'</th>';
     }
     
     public function renderFootCell() {
@@ -78,9 +117,9 @@ abstract class AyaXhtmlTableCell {
 
     public function render($aRow) {
         if (isset($aRow[$this->_sKey])) {
-            return '<td>'.$aRow[$this->_sKey].'<td>';
+            return '<td>'.$aRow[$this->_sKey].'</td>';
         } else {
-            return '<td>'.$this->_sValue.'<td>';
+            return '<td>'.$this->_sValue.'</td>';
         }
     }
 

@@ -13,6 +13,7 @@ cols:
     value: AAA
   today:
   tomorrow:
+    type: number
   yesterday:
   status:
     type: tag

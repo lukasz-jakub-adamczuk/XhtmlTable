@@ -69,8 +69,51 @@ class AyaXhtmlTable {
         $this->_aDataset = $aDataset;
     }
     
+    private static function _columnsAlignment() {
+        $sAlignment = '';
+        $i = 1;
+        
+        print_r($this->_aCells);
+        
+        foreach ($this->_aCells as $cells => $cell) {
+            // only visible cols
+            if ($cell->isVisible()) {
+                if (($sAlign = $cell->get('align')) != 'left') {
+                    $sAlignment .= ' c'.$i.$sAlign[0];
+                }
+                $i++;
+            }
+        }
+        return $sAlignment;
+    }
+    /*
+    public static function renderTotal($aCols = null) {
+        $aCols = $aCols ? $aCols : self::$_aCols;
+        foreach ($aCols as $cols => $col) {
+            if (isset(self::$_aCells[$col])) {
+                self::$_aTotal[$col] = 0;
+                foreach (self::$_aRows as $rows => $row) {
+                    self::$_aTotal[$col] += $row[self::$_aCells[$col]->getValue()];
+                }
+            }
+        }
+    }
+    
+    public static function renderAverage($aCols = null) {
+        $aCols = $aCols ? $aCols : self::$_aCols;
+        foreach ($aCols as $cols => $col) {
+            if (isset(self::$_aCells[$col])) {
+                self::$_aTotal[$col] = 0;
+                foreach (self::$_aRows as $rows => $row) {
+                    self::$_aTotal[$col] += $row[self::$_aCells[$col]->getValue()];
+                }
+                self::$_aTotal[$col] /= count(self::$_aRows);
+            }
+        }
+    }*/
+    
     public function render() {
-        $s = '<table>';
+        $s = '<table class="'.$this->_columnsAlignment().'">';
         // thead
         $s .= '<thead>';
             $s .= '<tr>';

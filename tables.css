@@ -1,0 +1,280 @@
+
+/** tables - style dla tabel
+-------------------------------------------------------------- **/
+
+/* table */
+table {
+    width: 100%;
+    font-size: .75em;
+    border-collapse: inherit;
+    border-spacing: 0;
+}
+table input,
+table select {
+    font-size: 1em;
+}
+caption {
+    color: #888;
+    text-align: left;
+    /* zamiast display: none;*/
+    text-indent: -9999px;
+    top: 0;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+col.selected {
+    border-bottom: 1px solid #ccc;
+    background: #000;
+}
+
+/* thead */
+thead tr,
+thead tr:hover {
+    /*background: #333 url(../img/layout/tr-bg.png) 80% 0 no-repeat;*/
+    background: #ccc;
+    color: #333;
+}
+
+/* tfoot */
+tfoot td {
+    border-top: 1px solid #888;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+/* rows */
+tr {
+	background: url(../img/layout/opacity-90-bg.png) 0 0 repeat;
+}
+tr:hover {
+	background: #ffa;
+}
+
+.odd {
+    background-color: #fff;
+}
+.even {
+    background-color: #f8f8f8;
+}
+
+.checked {
+    background-color: #ff8;
+}
+/*
+.checked.odd {
+    background-color: #ffc;
+}
+.checked.even {
+    background-color: #ffa;
+}
+*/
+
+.marked {
+	background-color: #ccf;
+}
+.expired {
+	background-color: #fee;
+}
+.installed {
+	background-color: #efe;
+}
+
+
+
+.marked th:first-child,
+.marked td:first-child {
+	background: url(../img/layout/white-dot.png) 0 0 repeat-y;
+}
+.expired td:first-child {
+	background-image: url(../img/layout/red-dot.png);
+}
+.installed td:first-child {
+    background-image: url(../img/layout/green-dot.png);
+}
+
+/* cells */
+th {
+    padding: 5px 4px;
+    text-align: left;
+}
+th:hover {
+	background-color: #aaa;
+}
+th.sorted {
+	background-color: #aaa;
+}
+th.sorted a:hover {
+	background: none;
+}
+
+th.asc,
+th.desc {
+    padding-right: 24px;
+    border: 1px solid #888;
+    border-width: 0 1px;
+    background: #aaa url(../img/layout/arrow-up.png) 100% 50% no-repeat;
+}
+th.asc {
+    background-image: url(../img/layout/arrow-up.png);
+}
+th.desc {
+    background-image: url(../img/layout/arrow-down.png);
+}
+th a {
+	display: block;
+    color: #333;
+}
+/*
+th a[href$="asc"]:hover {
+    background: url(../img/layout/arrow-up.png) 100% 50% no-repeat;
+}
+th a[href$="desc"]:hover {
+    background: url(../img/layout/arrow-down.png) 100% 50% no-repeat;
+}
+th a:hover {
+	color: #fff;
+	padding-right: 24px;
+	background-color: #aaa;
+}*/
+
+th a:hover {
+	color: #fff;
+}
+
+
+
+
+td {
+    padding: 4px;
+    border-bottom: 1px solid #eee;
+}
+td.sorted {
+	background: #eee;
+}
+td a:hover {
+    text-decoration: underline;
+}
+td .tag:hover {
+    text-decoration: none;
+}
+/*
+tbody tr:hover td,
+tfoot tr:hover td {
+    background: #ff8;
+}*/
+
+
+td .unit {
+    display: inline;
+}
+
+td a .unit {
+	padding-left: 0;
+}
+
+td .red {
+	color: red;
+	background: transparent;
+}
+
+/* menu pokaz wiecej akcji */
+.show-more {
+	display: block;
+	width: 32px;
+	height: 16px;
+	background: url(../img/layout/arrow-down.png) 50% 50% no-repeat;
+}
+.show-more:hover {
+	background-image: url(../img/layout/arrow-down-white.png);
+}
+.show-more.active,
+.show-more.active:hover {
+	background-image: url(../img/layout/arrow-up-white.png);
+}
+
+table + .menu {
+	position: absolute;
+	padding-top: 5px;
+	top: 100px;
+	left: 100px;
+	width: 200px;
+}
+
+table + .menu a {
+	display: block;
+	padding: 2px 5px;
+	color: #fff;
+}
+
+table + .menu a:hover {
+	
+}
+table + .menu p {
+	margin: 5px 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.c1c td:nth-child(1),
+.c2c td:nth-child(2),
+.c3c td:nth-child(3),
+.c4c td:nth-child(4),
+.c5c td:nth-child(5),
+.c6c td:nth-child(6),
+.c7c td:nth-child(7),
+.c8c td:nth-child(8),
+.c9c td:nth-child(9),
+.c10c td:nth-child(10),
+.c11c td:nth-child(11),
+.c12c td:nth-child(12),
+.c13c td:nth-child(13),
+.c14c td:nth-child(14),
+.c15c td:nth-child(15),
+.c16c td:nth-child(16),
+.c17c td:nth-child(17),
+.c18c td:nth-child(18),
+.c19c td:nth-child(19),
+.c20c td:nth-child(20){
+    text-align: center;
+}
+.c1r td:nth-child(1),
+.c2r td:nth-child(2),
+.c3r td:nth-child(3),
+.c4r td:nth-child(4),
+.c5r td:nth-child(5),
+.c6r td:nth-child(6),
+.c7r td:nth-child(7),
+.c8r td:nth-child(8),
+.c9r td:nth-child(9),
+.c10r td:nth-child(10),
+.c11r td:nth-child(11),
+.c12r td:nth-child(12),
+.c13r td:nth-child(13),
+.c14r td:nth-child(14),
+.c15r td:nth-child(15),
+.c16r td:nth-child(16),
+.c17r td:nth-child(17),
+.c18r td:nth-child(18),
+.c19r td:nth-child(19),
+.c20r td:nth-child(20) {
+    text-align: right;
+}
+
