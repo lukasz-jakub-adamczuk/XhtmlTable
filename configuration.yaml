@@ -12,13 +12,18 @@ cols:
     truncate: true
     value: AAA
   today:
+    type: number
   tomorrow:
     type: number
   yesterday:
+    type: number
   status:
     type: tag
     value: VAL
   order:
+    type: number
     value: ORDERs
   deleted:
+    type: bool
   delete_date:
+    type: date

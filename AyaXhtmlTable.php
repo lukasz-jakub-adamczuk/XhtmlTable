@@ -69,11 +69,9 @@ class AyaXhtmlTable {
         $this->_aDataset = $aDataset;
     }
     
-    private static function _columnsAlignment() {
+    private function _columnsAlignment() {
         $sAlignment = '';
         $i = 1;
-        
-        print_r($this->_aCells);
         
         foreach ($this->_aCells as $cells => $cell) {
             // only visible cols
