@@ -13,8 +13,10 @@ cols:
     value: AAA
   today:
     type: number
+    total: sum
   tomorrow:
     type: number
+    total: avg
   yesterday:
     type: number
   status:

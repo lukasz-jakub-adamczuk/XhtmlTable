@@ -12,6 +12,8 @@ abstract class AyaXhtmlTableCell {
     
     protected $_sFormat;
     
+    protected $_sTotal;
+    
     // cell attrs
     protected $_sSortLink;
     
@@ -106,18 +108,51 @@ abstract class AyaXhtmlTableCell {
     /* renders */
     
     public function renderHeadCell() {
-        return '<th>'.$this->_sKey.'</th>';
+        return '<th id="'.$this->_sKey.'"'
+        .(isset($this->_sWidth)
+            ? ' width="'.$this->_sWidth.'"'
+            : '')
+        .(isset($this->_sAxis)
+            ? ' axis="'.$this->_sAxis.'"'
+            : '')
+        .(isset($this->_sClass) || isset($this->_sAlign) || isset($aNavigator['sort'])
+            ? ' class="'.(isset($this->_sClass)
+                ? $this->_sClass
+                : '')
+            .(isset($this->_sAlign)
+                ? (' ta'.substr($this->_sAlign, 0, 1))
+                : '')
+            .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
+                ? ' sorted '.$aNavigator['sort_dir']
+                : '')
+            .'"'
+            : '')
+        .'>'
+        .$this->_sKey
+        .'</th>';
     }
     
-    public function renderFootCell() {
+    public function renderFootCell($aTotal) {
+        $mValue = isset($aTotal[$this->_sKey]) ? $aTotal[$this->_sKey] : '';
+        
+        if ($mValue !== '') {
+//            $mValue = $this->columnMultiplier($mValue);
+  //          $mValue = $this->columnDivider($mValue);
+            //$mValue = $this->columnRound($mValue, &$col);
+    //        $mValue = $this->columnFormat($mValue);
+      //      $mValue = $this->columnUnit($mValue);
+        }
+        
+        return '<td>'.$mValue.'</td>';
     }
     
-    protected function _renderElement() {
+    protected function _renderElement($sValue) {
+        return $sValue;
     }
 
     public function render($aRow) {
         if (isset($aRow[$this->_sKey])) {
-            return '<td>'.$aRow[$this->_sKey].'</td>';
+            return '<td>'.$this->_renderElement($aRow[$this->_sKey]).'</td>';
         } else {
             return '<td>'.$this->_sValue.'</td>';
         }

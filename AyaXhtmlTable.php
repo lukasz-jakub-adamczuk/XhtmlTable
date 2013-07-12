@@ -14,6 +14,8 @@ class AyaXhtmlTable {
     private $_aCells;
 
     private $_aDataset;
+    
+    private $_aTotal;
 
     private $_aTexts;
     
@@ -84,31 +86,31 @@ class AyaXhtmlTable {
         }
         return $sAlignment;
     }
-    /*
-    public static function renderTotal($aCols = null) {
-        $aCols = $aCols ? $aCols : self::$_aCols;
+    
+    public function renderTotal($aCols = null) {
+        $aCols = $aCols ? $aCols : $this->_aCols;
         foreach ($aCols as $cols => $col) {
-            if (isset(self::$_aCells[$col])) {
-                self::$_aTotal[$col] = 0;
-                foreach (self::$_aRows as $rows => $row) {
-                    self::$_aTotal[$col] += $row[self::$_aCells[$col]->getValue()];
+            if (isset($this->_aCells[$col])) {
+                $this->_aTotal[$col] = 0;
+                foreach ($this->_aDataset as $rows => $row) {
+                    $this->_aTotal[$col] += $row[$this->_aCells[$col]->getValue()];
                 }
             }
         }
     }
     
-    public static function renderAverage($aCols = null) {
-        $aCols = $aCols ? $aCols : self::$_aCols;
+    public function renderAverage($aCols = null) {
+        $aCols = $aCols ? $aCols : $this->_aCols;
         foreach ($aCols as $cols => $col) {
-            if (isset(self::$_aCells[$col])) {
-                self::$_aTotal[$col] = 0;
-                foreach (self::$_aRows as $rows => $row) {
-                    self::$_aTotal[$col] += $row[self::$_aCells[$col]->getValue()];
+            if (isset($this->_aCells[$col])) {
+                $this->_aTotal[$col] = 0;
+                foreach ($this->_aDataset as $rows => $row) {
+                    $this->_aTotal[$col] += $row[$this->_aCells[$col]->getValue()];
                 }
-                self::$_aTotal[$col] /= count(self::$_aRows);
+                $this->_aTotal[$col] /= count($this->_aRows);
             }
         }
-    }*/
+    }
     
     public function render() {
         $s = '<table class="'.$this->_columnsAlignment().'">';
@@ -123,8 +125,19 @@ class AyaXhtmlTable {
             $s .= '</tr>';
         $s .= '</head>';
         // tfoot
-        $s .= '<tfoot>';
-        $s .= '</tfoot>';
+        $this->renderTotal(array('today', 'yesterday'));
+        //$this->renderAverage(['tomorrow', 'order']);
+        if (!empty($this->_aTotal)) {
+            $s .= '<tfoot>';
+                $s .= '<tr>';
+                foreach ($this->_aCells as $cell) {
+                    if ($cell->isVisible()) {
+                        $s .= $cell->renderFootCell($this->_aTotal);
+                    }
+                }
+                $s .= '</tr>';
+            $s .= '</tfoot>';
+        }
         // tbody
         $s .= '<tbody>';
         foreach ($this->_aDataset as $rows => $row) {
