@@ -46,7 +46,7 @@ abstract class AyaXhtmlTableCell {
         if (isset($_aParams['value'])) {
             $this->_sValue = $aParams['value'];
         } else {
-            $this->_sValue = 'Unknown';
+            $this->_sValue = $this->_sKey;
         }
         
         // default values (if not comes from params)
@@ -105,6 +105,36 @@ abstract class AyaXhtmlTableCell {
         return $this->_sValue;
     }
     
+    /* column operations */
+    
+    public function columnValue(&$aRow, $sKey = null) {
+        /*if ($sKey) {
+            if (isset($aRow[$sKey])) {
+                return $aRow[$sKey]; 
+            }
+        } else {*/
+            if (isset($aRow[$this->_sValue])) {
+                return $aRow[$this->_sValue]; 
+            } else {
+                return $this->_sValue;
+            }
+        //}
+        return null;
+    }
+    
+    public function columnDefault($mValue, &$aRow = null) {
+        if (isset($this->_sDefault)) {
+            $sDefault = is_null($mValue) ? $this->_sDefault : $mValue;
+        } else {
+            $sDefault = is_null($mValue) ? '&bull;' : $mValue;
+        }
+        return $sDefault;
+    }
+    
+    public function columnEscape($mValue) {
+        return $this->_bEscape ? htmlspecialchars($mValue) : $mValue;
+    }
+    
     /* renders */
     
     public function renderHeadCell() {
@@ -133,29 +163,29 @@ abstract class AyaXhtmlTableCell {
     }
     
     public function renderFootCell($aTotal) {
-        $mValue = isset($aTotal[$this->_sKey]) ? $aTotal[$this->_sKey] : '';
+        $mValue = isset($aTotal[$this->_sKey]) ? $aTotal[$this->_sKey] : null;
         
-        if ($mValue !== '') {
+        if ($mValue) {
 //            $mValue = $this->columnMultiplier($mValue);
   //          $mValue = $this->columnDivider($mValue);
             //$mValue = $this->columnRound($mValue, &$col);
     //        $mValue = $this->columnFormat($mValue);
-      //      $mValue = $this->columnUnit($mValue);
+            $mValue = $this->columnUnit($mValue);
         }
         
         return '<td>'.$mValue.'</td>';
     }
     
-    protected function _renderElement($sValue) {
-        return $sValue;
+    protected function _renderElement($aRow, $iCounter) {
+        $mValue = $this->columnValue($aRow);
+        $mValue = $this->columnDefault($mValue, $aRow);
+        $mValue = $this->columnEscape($mValue);
+        
+        return $mValue;
     }
 
-    public function render($aRow) {
-        if (isset($aRow[$this->_sKey])) {
-            return '<td>'.$this->_renderElement($aRow[$this->_sKey]).'</td>';
-        } else {
-            return '<td>'.$this->_sValue.'</td>';
-        }
+    public function render($aRow, $iCounter) {
+        return '<td>'.$this->_renderElement($aRow, $iCounter).'</td>';
     }
 
 }

@@ -64,6 +64,11 @@ class AyaXhtmlTable {
             
             // configuring cell
             $this->_aCells[$cols]->configure($cols, $col);
+            
+            // preparing to count total
+            if (isset($col['total'])) {
+                $this->_aTotal['conf'][$cols] = $col['total'];
+            }
         }
     }
     
@@ -89,30 +94,27 @@ class AyaXhtmlTable {
     
     public function renderTotal($aCols = null) {
         $aCols = $aCols ? $aCols : $this->_aCols;
+        $iRows = count($this->_aDataset);
+        
         foreach ($aCols as $cols => $col) {
-            if (isset($this->_aCells[$col])) {
-                $this->_aTotal[$col] = 0;
+            if (isset($this->_aCells[$cols])) {
+                $this->_aTotal['values'][$cols] = 0;
                 foreach ($this->_aDataset as $rows => $row) {
-                    $this->_aTotal[$col] += $row[$this->_aCells[$col]->getValue()];
+                    $this->_aTotal['values'][$cols] += $row[$cols];
+                }
+                if ($this->_aTotal['conf'][$cols] == 'avg') {
+                    $this->_aTotal['values'][$cols] /= $iRows;
                 }
             }
         }
     }
     
-    public function renderAverage($aCols = null) {
-        $aCols = $aCols ? $aCols : $this->_aCols;
-        foreach ($aCols as $cols => $col) {
-            if (isset($this->_aCells[$col])) {
-                $this->_aTotal[$col] = 0;
-                foreach ($this->_aDataset as $rows => $row) {
-                    $this->_aTotal[$col] += $row[$this->_aCells[$col]->getValue()];
-                }
-                $this->_aTotal[$col] /= count($this->_aRows);
-            }
-        }
-    }
     
     public function render() {
+        // pre render
+        $this->renderTotal($this->_aTotal['conf']);
+        
+        // html table code
         $s = '<table class="'.$this->_columnsAlignment().'">';
         // thead
         $s .= '<thead>';
@@ -125,14 +127,12 @@ class AyaXhtmlTable {
             $s .= '</tr>';
         $s .= '</head>';
         // tfoot
-        $this->renderTotal(array('today', 'yesterday'));
-        //$this->renderAverage(['tomorrow', 'order']);
-        if (!empty($this->_aTotal)) {
+        if (!empty($this->_aTotal['values'])) {
             $s .= '<tfoot>';
                 $s .= '<tr>';
                 foreach ($this->_aCells as $cell) {
                     if ($cell->isVisible()) {
-                        $s .= $cell->renderFootCell($this->_aTotal);
+                        $s .= $cell->renderFootCell($this->_aTotal['values']);
                     }
                 }
                 $s .= '</tr>';
@@ -140,12 +140,14 @@ class AyaXhtmlTable {
         }
         // tbody
         $s .= '<tbody>';
+        $i = 1; // internal counter
         foreach ($this->_aDataset as $rows => $row) {
             $s .= '<tr>';
             foreach ($this->_aCells as $cell) {
-                $s .= $cell->render($row);
+                $s .= $cell->render($row, $i);
             }
             $s .= '</tr>';
+            $i++;
         }
         $s .= '</tbody>';
         $s .= '</table>';

@@ -8,9 +8,10 @@ class AyaXhtmlTableCellDate extends AyaXhtmlTableCell {
         $this->_sFormat = 'd-m-Y';
     }
     
-    protected function _renderElement($sValue) {
-        //return $sValue . '_aaa_';
-        return date($this->_sFormat, $sValue);
+    protected function _renderElement($aRow, $iNumber) {
+        $mValue = $this->columnValue($aRow);
+        
+        return date($this->_sFormat, (int)$mValue);
     }
     
 }

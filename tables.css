@@ -20,6 +20,14 @@ body {
     text-align: center;
 }
 
+.unit {
+    color: #aaa;
+}
+
+table .unit {
+    padding-left: 3px;
+}
+
 
 
 /** tables - style dla tabel
