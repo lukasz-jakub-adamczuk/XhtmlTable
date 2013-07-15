@@ -1,10 +1,7 @@
 <?php
 
 class AyaXhtmlTable {
-    /**
-    *
-    * abc
-    */
+    
     private $_sId;
     
     private $_aRows;

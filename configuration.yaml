@@ -10,7 +10,6 @@ cols:
     type: text
   desc:
     truncate: true
-    value: AAA
   today:
     type: number
     total: sum
@@ -22,11 +21,13 @@ cols:
     type: number
   status:
     type: tag
-    value: VAL
+    tags:
+      ok: green
+      maybe: orange
+      not: red
   order:
     type: number
-    value: ORDERs
   deleted:
     type: bool
-  delete_date:
+  delete-date:
     type: date

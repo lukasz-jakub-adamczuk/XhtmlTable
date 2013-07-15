@@ -1,3 +1,113 @@
+/*
+@import 'style.css';
+*/
+
+
+/** tags - etykiety
+-------------------------------------------------------------- **/
+
+
+.tag {
+    padding: 2px 6px;
+    color: #fff;
+    background: #aaa;
+}
+/*
+span[class^=tag] {
+    padding: 2px 6px;
+    color: #fff;
+    background: #aaa;
+}*/
+
+span[class^=tag] {
+    padding: 2px 8px;
+    color: #fff;
+    border-radius: 4px;
+}
+a[class^=tag]:hover {
+	text-decoration: none;
+}
+.tag {
+    padding: 2px 6px;
+}
+
+.tag-0,
+.tag-1,
+.tag-no,
+.tag-yes {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.tag-0,
+.tag-no {
+    background: #c32;
+}
+.tag-1,
+.tag-yes {
+    background: #7a1;
+}
+
+.tag-red {
+    background: #c32;
+}
+.tag-green {
+    background: #080;
+}
+.tag-blue {
+    background: #48b;
+}
+
+.tag-light-gray {
+    background: #ccc;
+}
+.tag-gray {
+    background: #888;
+}
+.tag-dark-gray {
+    background: #444;
+}
+
+.tag-white {
+    background: #fff;
+}
+.tag-black {
+    background: #000;
+}
+
+.tag-transparent {
+    background: transparent;
+}
+
+.tag-orange {
+    background: orange;
+}
+
+
+/*/ szerokosc tagow on/off /*/
+span.tag-no,
+span.tag-yes {
+	padding: 2px 16px;
+	border: 1px solid #ddd;
+}
+
+/*/ tagi wylaczone /*/
+.tag-no,
+a:hover .tag-yes {
+	/*background: transparent url(../img/layout/checkmark-25.png) 50% 50% no-repeat;*/
+	background: transparent;
+	border: 1px solid #ccc;
+}
+
+/*/ tagi wlaczone /*/
+.tag-yes,
+a:hover .tag-no {
+    /*background: #77AB13 url(../img/layout/checkmark-75.png) 50% 50% no-repeat;*/
+    background: #bbb url(../img/layout/checkmark-75.png) 50% 50% no-repeat;
+}
+
+
+
 /** common - wspolne style
 -------------------------------------------------------------- **/
 

@@ -159,6 +159,7 @@ abstract class AyaXhtmlTableCell {
             : '')
         .'>'
         .$this->_sKey
+        //.'<span class="icon-arrow-down"></span>'
         .'</th>';
     }
     
