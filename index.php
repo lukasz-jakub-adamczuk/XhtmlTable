@@ -1,7 +1,14 @@
 <?php
 
+$start = microtime(true);
+//for ($i = 0; $i < 10000000; ++$i) {
+    // do something
+//}
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+date_default_timezone_set('Europe/Warsaw');
 
 define('ROOT_DIR', __DIR__);
 
@@ -37,3 +44,6 @@ echo '</style>';
 
 echo $oTable->render();
 
+
+$total = microtime(true) - $start;
+echo $total;
