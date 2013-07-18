@@ -1,0 +1,14 @@
+cols:
+  idx:
+    name: Lp.
+  name:
+    name: Nazwa
+  title:
+    name: Tytuł
+  description:
+    name: Opis
+  status:
+    name: Status
+values:
+  no: Nie
+  yes: Tak
