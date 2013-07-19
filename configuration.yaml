@@ -29,5 +29,5 @@ cols:
     type: number
   deleted:
     type: bool
-  delete-date:
+  delete_date:
     type: date
