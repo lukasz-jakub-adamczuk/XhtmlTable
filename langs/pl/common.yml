@@ -1,0 +1,23 @@
+cols:
+  idx:
+    name: Lp.
+  name:
+    name: Nazwa
+  title:
+    name: Tytuł
+  description:
+    name: Opis
+  status:
+    name: Status
+    title: this title commes from common.yml
+values:
+  0: Fałsz
+  1: Prawda
+  no: Nie
+  yes: Tak
+  on: Włączony
+  off: Wyłączony
+titles:
+  edit: Edytuj %s
+  change: Zmień %s
+  delete: Usuń %s

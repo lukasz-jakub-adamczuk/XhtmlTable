@@ -13,6 +13,8 @@ abstract class AyaXhtmlTableCell {
     protected $_sFormat;
     
     protected $_sTotal;
+
+    protected $_aTexts;
     
     // cell attrs
     protected $_sSortLink;
@@ -84,6 +86,14 @@ abstract class AyaXhtmlTableCell {
             }
         }
     }
+
+    public function translate($aTexts, $sKey = null) {
+        if ($sKey) {
+            $this->_aTexts[$sKey] = $aTexts;
+        } else {
+            $this->_aTexts = $aTexts;
+        }
+    }
     
     public function isVisible() {
         return $this->_bVisible;
@@ -134,6 +144,10 @@ abstract class AyaXhtmlTableCell {
     public function columnEscape($mValue) {
         return $this->_bEscape ? htmlspecialchars($mValue) : $mValue;
     }
+
+    public function columnElement($mValue, &$aRow = null) {
+        return $mValue;
+    }
     
     /* renders */
     
@@ -158,8 +172,8 @@ abstract class AyaXhtmlTableCell {
             .'"'
             : '')
         .'>'
-        .$this->_sKey
-        //.'<span class="icon-arrow-down"></span>'
+        .(isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey)
+        //.'<span class="icon-arrow-down"></span>'  
         .'</th>';
     }
     
@@ -171,7 +185,7 @@ abstract class AyaXhtmlTableCell {
   //          $mValue = $this->columnDivider($mValue);
             //$mValue = $this->columnRound($mValue, &$col);
     //        $mValue = $this->columnFormat($mValue);
-            $mValue = $this->columnUnit($mValue);
+            //$mValue = $this->columnUnit($mValue);
         }
         
         return '<td>'.$mValue.'</td>';
@@ -181,6 +195,8 @@ abstract class AyaXhtmlTableCell {
         $mValue = $this->columnValue($aRow);
         $mValue = $this->columnDefault($mValue, $aRow);
         $mValue = $this->columnEscape($mValue);
+
+        $mValue = $this->columnElement($mValue, $aRow);
         
         return $mValue;
     }

@@ -1,0 +1,18 @@
+cols:
+  today:
+    name: Dzisiaj
+    title: Teraz no to aktualnie
+  tomorrow:
+    name: Jutro
+  yesterday:
+    name: Wczoraj
+  status:
+    name: Statusic
+caption: common (global) and local texts should be merged in one temp (cache) file
+summary: Podsumowanie dedykowane tej tabeli
+
+titles:
+  tomorrow: use this %s text for title
+
+values:
+  yesterday: AAA
