@@ -10,7 +10,7 @@ class AyaXhtmlTableCellTag extends AyaXhtmlTableCell {
     
     /* column operations */
     
-    public function columnTags($mValue, &$aRow) {
+    public function columnElement($mValue, &$aRow) {
         if (!empty($this->_sTitle)) {
             $sTitle = isset($this->_aTexts['titles'][$mValue]) ? ' title="'.$this->_aTexts['titles'][$mValue].'"' : ' title="'.$this->_sTitle.'"';
         } else {
@@ -30,18 +30,6 @@ class AyaXhtmlTableCellTag extends AyaXhtmlTableCell {
         } else {
             return $mValue;
         }
-    }
-    
-    protected function _renderElement($aRow, $iCounter) {
-        $mValue = parent::_renderElement($aRow, $iCounter);
-        
-        $mValue = $this->columnTags($mValue, $aRow);
-        
-        return $mValue;
-    }
-
-    public function render($aRow, $iCounter) {
-        return '<td>'.$this->_renderElement($aRow, $iCounter).'</td>';
     }
 
 }

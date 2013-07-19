@@ -2,7 +2,7 @@
 
 class AyaXhtmlTableCellBool extends AyaXhtmlTableCell {
 
-    protected $_aTags;
+    protected $_aValues;
     
     protected function _beforeConfigure() {
         $this->_sAlign = 'center';
@@ -10,5 +10,12 @@ class AyaXhtmlTableCellBool extends AyaXhtmlTableCell {
     
     /* column operations */
 
+    public function columnElement($mValue, &$aRow) {
+    	if (isset($this->_aTexts['values'][$mValue])) {
+	    	return '<span>'.$this->_aTexts['values'][$mValue].'</span>';
+	    } else {
+	    	return $mValue;
+	    }
+    }
 
 }

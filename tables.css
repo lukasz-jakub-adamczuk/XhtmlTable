@@ -157,13 +157,10 @@ table select {
 caption {
     color: #888;
     text-align: left;
-    /* zamiast display: none;*/
-    text-indent: -9999px;
-    top: 0;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
+    padding: 5px 15px;
+    border-top: 1px solid #aaa;
+    background: #eee;
+    caption-side: bottom;
 }
 col.selected {
     border-bottom: 1px solid #ccc;

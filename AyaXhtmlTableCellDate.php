@@ -4,14 +4,24 @@ class AyaXhtmlTableCellDate extends AyaXhtmlTableCell {
 
     protected function _beforeConfigure() {
         $this->_sAlign = 'center';
-        //$this->_sFormat = 'Y-m-d';
-        $this->_sFormat = 'd-m-Y';
+        //$this->_sFormat = 'd-m-Y';
     }
-    
-    protected function _renderElement($aRow, $iNumber) {
-        $mValue = $this->columnValue($aRow);
+
+    /* column operations */
+
+    public function columnElement($mValue, &$aRow) {
+        if (!empty($this->_sTitle)) {
+            $sTitle = isset($this->_aTexts['titles'][$mValue]) ? ' title="'.$this->_aTexts['titles'][$mValue].'"' : ' title="'.$this->_sTitle.'"';
+        } else {
+            $sTitle = '';
+        }
         
-        return date($this->_sFormat, (int)$mValue);
+        // TODO date without quotes is parsed as timestamp
+        if (is_int($mValue)) {
+        	return date($this->_sFormat, (int)$mValue);
+        } else {
+        	return date($this->_sFormat, strtotime($mValue));
+        }
     }
-    
+
 }

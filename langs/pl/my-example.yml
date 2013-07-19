@@ -6,6 +6,8 @@ cols:
     name: Jutro
   yesterday:
     name: Wczoraj
+  status:
+    name: Statusic
 caption: common (global) and local texts should be merged in one temp (cache) file
 summary: Podsumowanie dedykowane tej tabeli
 

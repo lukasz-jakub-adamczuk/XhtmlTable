@@ -13,15 +13,32 @@ date_default_timezone_set('Europe/Warsaw');
 define('ROOT_DIR', __DIR__);
 
 
-require_once ROOT_DIR . '/vendor/yaml/sfYamlParser.php';
+// require_once ROOT_DIR . '/vendor/yaml/sfYamlParser.php';
 
-$oYamlParser = new sfYamlParser();
+// $oYamlParser = new sfYamlParser();
+
+// $file = ROOT_DIR . '/configuration.yaml';
+// $aConfig = $oYamlParser->parse(file_get_contents($file));
+
+// $file = ROOT_DIR . '/dataset.yml';
+// $aDataset = $oYamlParser->parse(file_get_contents($file));
+
+
+
+require_once ROOT_DIR . '/AyaYamlLoader.php';
 
 $file = ROOT_DIR . '/configuration.yaml';
-$aConfig = $oYamlParser->parse(file_get_contents($file));
+$aConfig = AyaYamlLoader::parse($file);
 
 $file = ROOT_DIR . '/dataset.yml';
-$aDataset = $oYamlParser->parse(file_get_contents($file));
+$aDataset = AyaYamlLoader::parse($file);
+
+$file = ROOT_DIR . '/langs/pl/common.yml';
+$aTexts = AyaYamlLoader::parse($file);
+
+$file = ROOT_DIR . '/langs/pl/my-example.yml';
+$aLocalTexts = AyaYamlLoader::parse($file);
+
 
 
 //print_r($aDataset);
@@ -36,14 +53,27 @@ $oTable->configure($aConfig);
 
 $oTable->assign($aDataset);
 
+$oTable->translate($aTexts, $aLocalTexts);
+
 //print_r($oTable);
+
+echo '<!DOCTYPE html>';
+echo '<html>';
+echo '<head>';
+echo '<meta charset="utf-8" />';
+echo '<title>Title of the document</title>';
 
 echo '<style>';
 echo file_get_contents(ROOT_DIR . '/tables.css');
 echo '</style>';
+echo '</head>';
 
+echo '<body>';
 echo $oTable->render();
-
 
 $total = microtime(true) - $start;
 echo $total;
+
+echo '</body>';
+
+echo '</html>';

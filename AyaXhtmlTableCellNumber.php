@@ -8,14 +8,9 @@ class AyaXhtmlTableCellNumber extends AyaXhtmlTableCell {
         $this->_sAlign = 'right';
     }
     
-    protected function _renderElement($aRow, $iCounter) {
-        $mValue = $this->columnValue($aRow);
-        $mValue = $this->columnDefault($mValue);
-        $mValue = $this->columnUnit($mValue);
-        return $mValue;
-    }
+    /* column operations */
     
-    public function columnUnit($mValue, &$aRow = null) {
+    public function columnElement($mValue, &$aRow) {
         /*$sUnit = '';
         if (isset($this->_sUnit)) {
             if (is_array($this->_sUnit)) {

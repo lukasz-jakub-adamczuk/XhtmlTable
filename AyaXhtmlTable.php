@@ -21,6 +21,8 @@ class AyaXhtmlTable {
     private $_sTableCaption = '';
     
     private $_sTableSummary = '';
+
+    private $_sTableDateFormat = 'm-d-Y';
     
     public function __construct() {
         
@@ -47,6 +49,7 @@ class AyaXhtmlTable {
             }
         }
         
+        // creating cells objects
         foreach ($aConfig['cols'] as $cols => $col) {
             // naming
             $sCellType = (isset($col['type']) ? $col['type'] : 'text');
@@ -57,6 +60,11 @@ class AyaXhtmlTable {
                 $this->_aCells[$cols] = new $sCellName(str_replace(' ', '', ucwords(str_replace('-', ' ', $this->_sId))));
             } else {
                 $this->_aCells[$cols] = new AyaXhtmlTableCellText(str_replace(' ', '', ucwords(str_replace('-', ' ', $this->_sId))));
+            }
+            
+            // set default date format
+            if ($sCellType === 'date') {
+                $this->_aCells[$cols]->set('format', $this->_sTableDateFormat);
             }
             
             // configuring cell
@@ -72,7 +80,82 @@ class AyaXhtmlTable {
     public function assign($aDataset) {
         $this->_aDataset = $aDataset;
     }
+
+    // specific texts overrides values from basic texts
+    public function translate($aBasicTexts, $aSpecificTexts = null) {
+        // setting basic texts
+        $this->_aTexts = $aBasicTexts;
+        // overrides basic by specific
+        if ($aSpecificTexts) {
+            //$this->_aTexts = $this->_overrideTexts($aSpecificTexts);
+            $this->_overrideTexts($aSpecificTexts);
+            //$this->_overrideBaseByValues($this->_aTexts, $aSpecificTexts);
+        }
+
+        if (isset($this->_aTexts['caption'])) {
+            $this->_sTableCaption = $this->_aTexts['caption'];
+        }
+        if (isset($this->_aTexts['summary'])) {
+            $this->_sTableSummary = $this->_aTexts['summary'];
+        }
+
+        // TODO cache manager
+        // all what is need cache and use next time
+        // print_r($this->_aTexts);
+
+        // celumn texts
+        // TODO could be moved to private method
+        foreach ($this->_aCells as $ck => $cell) {
+            // checking does texts exists
+            if (isset($this->_aTexts['cols'][$ck])) {
+                $cell->translate($this->_aTexts['cols'][$ck]);
+            }
+            if (isset($this->_aTexts['values'])) {
+                $cell->translate($this->_aTexts['values'], 'values');
+            }
+            if (isset($this->_aTexts['titles'])) {
+                $cell->translate($this->_aTexts['titles'], 'titles');
+            }
+        }
+    }
+
+    // TODO change to recurssion
+    private function _overrideTexts($aTexts) {
+        foreach ($aTexts as $key => $value) {
+            // cols level
+            if (isset($this->_aTexts[$key])) {
+                // try override
+                foreach ($value as $val => $v) {
+                    // title level
+                    if (isset($this->_aTexts[$key][$val])) {
+                        foreach ($v as $k2 => $v2) {
+                            // params level
+                            $this->_aTexts[$key][$val][$k2] = $v2;
+                        }
+                    } else {
+                        $this->_aTexts[$key][$val] = $v;
+                    }
+                }
+            } else {
+                // create
+                $this->_aTexts[$key] = $value;
+            }
+        }
+    }
     
+
+    private function _overrideBaseByValues($aBase, $aValues) {
+        foreach ($aValues as $key => $value) {
+            if (isset($aBase[$key])) {
+                // try override
+                $this->_overrideBaseByValues($aBase[$key], $value);
+            } else {
+                // create
+                $aBase[$key] = $value;
+            }
+        }
+    }
+
     private function _columnsAlignment() {
         $sAlignment = '';
         $i = 1;
@@ -112,7 +195,8 @@ class AyaXhtmlTable {
         $this->renderTotal($this->_aTotal['conf']);
         
         // html table code
-        $s = '<table class="'.$this->_columnsAlignment().'">';
+        $s = '<table class="'.$this->_columnsAlignment().'" summary="'.$this->_sTableSummary.'">';
+        $s .= '<caption>'.$this->_sTableCaption.'</caption>';
         // thead
         $s .= '<thead>';
             $s .= '<tr>';

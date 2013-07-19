@@ -5,6 +5,9 @@ cols:
     type: idx
   name:
     type: link
+    #link: 'ctrl/edit/123'
+    link: '{ctrl}/edit/{id}'
+    #link: ['ctrl', '/edit', 'id_domain']
     title: some text to click
   title:
     type: text
@@ -31,3 +34,8 @@ cols:
     type: bool
   delete-date:
     type: date
+    value: delete_date
+  delete-date-format:
+    type: date
+    format: 'D, d-m-Y'
+    value: delete_date
