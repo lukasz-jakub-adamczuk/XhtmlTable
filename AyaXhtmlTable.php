@@ -103,7 +103,7 @@ class AyaXhtmlTable {
         // all what is need cache and use next time
         // print_r($this->_aTexts);
 
-        // celumn texts
+        // column texts
         // TODO could be moved to private method
         foreach ($this->_aCells as $ck => $cell) {
             // checking does texts exists

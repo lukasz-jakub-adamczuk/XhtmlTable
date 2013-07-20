@@ -10,7 +10,7 @@ class AyaXhtmlTableCellNumber extends AyaXhtmlTableCell {
     
     /* column operations */
     
-    public function columnElement($mValue, &$aRow) {
+    public function columnElement($mValue, &$aRow = null) {
         /*$sUnit = '';
         if (isset($this->_sUnit)) {
             if (is_array($this->_sUnit)) {

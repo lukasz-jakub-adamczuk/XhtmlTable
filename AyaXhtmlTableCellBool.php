@@ -10,7 +10,7 @@ class AyaXhtmlTableCellBool extends AyaXhtmlTableCell {
     
     /* column operations */
 
-    public function columnElement($mValue, &$aRow) {
+    public function columnElement($mValue, &$aRow = null) {
     	if (isset($this->_aTexts['values'][$mValue])) {
 	    	return '<span>'.$this->_aTexts['values'][$mValue].'</span>';
 	    } else {

@@ -14,7 +14,7 @@ class AyaXhtmlTableCellLink extends AyaXhtmlTableCell {
 
     /* column operations */
     
-    public function columnElement($mValue, &$aRow) {
+    public function columnElement($mValue, &$aRow = null) {
     	if (isset($this->_sLink)) {
 	    	return '<a href="'.$this->_sLink.'">'.$mValue.'</a>';
 	    } else {

@@ -9,7 +9,7 @@ class AyaXhtmlTableCellDate extends AyaXhtmlTableCell {
 
     /* column operations */
 
-    public function columnElement($mValue, &$aRow) {
+    public function columnElement($mValue, &$aRow = null) {
         if (!empty($this->_sTitle)) {
             $sTitle = isset($this->_aTexts['titles'][$mValue]) ? ' title="'.$this->_aTexts['titles'][$mValue].'"' : ' title="'.$this->_sTitle.'"';
         } else {
