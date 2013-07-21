@@ -1,0 +1,51 @@
+0:
+  id_domain: 10
+  name: aaa
+  title: Some short text
+  subtitle: Why short text
+  desc: Little bit longer text...
+  today: 10
+  tomorrow: 20
+  yesterday: 30
+  status: ok
+  order: 4
+  deleted: 1
+  delete_date: 2012-01-04
+1:
+  id_domain: 11
+  name: bbb
+  title: Let it be
+  subtitle: Or don't let
+  desc: Show me what you got
+  today: 44
+  tomorrow: 22
+  yesterday: 66
+  status: not
+  order: 2
+  deleted: 1
+  delete_date: 2013-09-12 10:10:10
+2:
+  id_domain: 210
+  name: ccc
+  title: Tell me if you want
+  desc: And there were they three...
+  today: 33
+  tomorrow: 66
+  yesterday: 99
+  status: ok
+  order: 14
+  deleted: 0
+  delete_date: '2000-11-05 11:11:11'
+3:
+  id_domain: 120
+  name: ddd
+  title: No no no
+  desc: Catch me if you can
+  today: 1
+  tomorrow: 10
+  yesterday: 100
+  status: maybe
+  order: 9
+  deleted: 1
+  delete_date: 1234567890
+

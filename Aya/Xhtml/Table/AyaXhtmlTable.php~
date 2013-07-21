@@ -32,7 +32,7 @@ class AyaXhtmlTable {
         //
         
         // require parent class
-        require_once dirname(__FILE__) . '/AyaXhtmlTableCell.php';
+        require_once dirname(__FILE__) . '/Cell/AyaXhtmlTableCell.php';
         
         // listing required classes
         foreach ($aConfig['cols'] as $cols => $col) {
@@ -43,8 +43,8 @@ class AyaXhtmlTable {
         // including required classes
         foreach ($aClasses as $sCellName) {
             if (!class_exists($sCellName, false)) {
-                if (file_exists(dirname(__FILE__) . '/'.$sCellName.'.php')) {
-                    require_once dirname(__FILE__) . '/'.$sCellName.'.php';   
+                if (file_exists(dirname(__FILE__) . '/Cell/'.$sCellName.'.php')) {
+                    require_once dirname(__FILE__) . '/Cell/'.$sCellName.'.php';   
                 }
             }
         }

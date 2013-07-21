@@ -23,7 +23,7 @@ class AyaYamlLoader extends AyaSingleton {
 
 	public static function getInstance() {
 	    if (is_null(self::$_instance)) {
-	    	require_once __DIR__ . '/vendor/yaml/sfYamlParser.php';
+	    	require_once dirname(dirname(__DIR__)) . '/vendor/yaml/sfYamlParser.php';
 	        self::$_instance = new sfYamlParser();
 	    }
 	    return self::$_instance;

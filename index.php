@@ -23,14 +23,21 @@ define('ROOT_DIR', __DIR__);
 // $file = ROOT_DIR . '/dataset.yml';
 // $aDataset = $oYamlParser->parse(file_get_contents($file));
 
+if (isset($_GET['example'])) {
+    $sExample = $_GET['example'];
+} else {
+    $sExample = 'basic';
+}
 
+require_once ROOT_DIR . '/Aya/Yaml/AyaYamlLoader.php';
 
-require_once ROOT_DIR . '/AyaYamlLoader.php';
-
-$file = ROOT_DIR . '/configuration.yaml';
+$file = ROOT_DIR . '/examples/'.$sExample.'.yml';
 $aConfig = AyaYamlLoader::parse($file);
 
-$file = ROOT_DIR . '/dataset.yml';
+$file = ROOT_DIR . '/datasets/'.$sExample.'.yml';
+if (!file_exists($file)) {
+    $file = ROOT_DIR . '/datasets/basic.yml';
+}
 $aDataset = AyaYamlLoader::parse($file);
 
 $file = ROOT_DIR . '/langs/pl/common.yml';
@@ -45,7 +52,7 @@ $aLocalTexts = AyaYamlLoader::parse($file);
 
 // package('Aya.Xhtml.Table');
 
-require_once 'AyaXhtmlTable.php';
+require_once ROOT_DIR . '/Aya/Xhtml/Table/AyaXhtmlTable.php';
 
 $oTable = new AyaXhtmlTable();
 
@@ -69,6 +76,10 @@ echo '</style>';
 echo '</head>';
 
 echo '<body>';
+echo '<div style="padding: 25px;">';
+echo '<a href="index.php?example=basic">Basic example</a> ' ;
+echo '<a href="index.php?example=offer">Offer example</a> ' ;
+echo '</div>';
 echo $oTable->render();
 
 $total = microtime(true) - $start;

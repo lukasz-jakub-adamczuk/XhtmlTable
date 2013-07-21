@@ -1,0 +1,29 @@
+cols:
+  id-offer:
+    type: checkbox
+    width: 25
+  index:
+    type: idx
+  title:
+    link: [/offer/, id_offer]
+    width: '*'
+  subtitle:
+    width: 40%
+    modifiers:
+      truncate: '150'
+  description:
+    width: 20%
+    modifiers:
+      truncate: '75'
+    escape: true
+  visible:
+    type: text
+    width: 5%
+  special:
+    width: 5%
+    tags:
+      0: gray
+      1: green
+  order:
+    value: idx
+    width: 5%
