@@ -227,7 +227,9 @@ class AyaXhtmlTable {
         foreach ($this->_aDataset as $rows => $row) {
             $s .= '<tr>';
             foreach ($this->_aCells as $cell) {
-                $s .= $cell->render($row, $i);
+                if ($cell->isVisible()) {
+                    $s .= $cell->render($row, $i);
+                }
             }
             $s .= '</tr>';
             $i++;

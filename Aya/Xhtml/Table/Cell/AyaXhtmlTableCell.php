@@ -16,6 +16,8 @@ abstract class AyaXhtmlTableCell {
 
     protected $_aTexts;
     
+    protected $_sAxis;
+    
     // cell attrs
     protected $_sSortLink;
     
@@ -49,6 +51,10 @@ abstract class AyaXhtmlTableCell {
             $this->_sValue = $aParams['value'];
         } else {
             $this->_sValue = $this->_sKey;
+        }
+        
+        if ($this->_bSortable) {
+            $this->_sAxis = $this->_sValue;
         }
         
         // default values (if not comes from params)
@@ -172,8 +178,33 @@ abstract class AyaXhtmlTableCell {
             .'"'
             : '')
         .'>'
-        .(isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey)
-        //.'<span class="icon-arrow-down"></span>'  
+        .($this->_bSortable && isset($this->_sAxis)
+            ? '<a href="'.$sPreLink.$this->_sSortLink
+            .'/'
+            .(isset($this->_sAxis)
+                ? $this->_sAxis
+                : $this->_sKey)
+            .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
+                ? ($aNavigator['sort_dir'] == 'asc'
+                    ? '/desc'
+                    : '/asc')
+                : (isset($aNavigator['sort_dir']) && $aNavigator['sort_dir'] == 'desc'
+                    ? '/desc'
+                    : '/asc'))
+            .'"'
+            .' title="'
+            .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
+                ? ($aNavigator['sort_dir'] == 'asc'
+                    ? $this->_aTexts['common']['sort']['desc']
+                    : $this->_aTexts['common']['sort']['asc'])
+                : (isset($aNavigator['sort_dir']) && $aNavigator['sort_dir'] == 'desc'
+                    ? $this->_aTexts['common']['sort']['desc']
+                    : $this->_aTexts['common']['sort']['asc']))
+            .'"'
+            .'>'
+            .(isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey)
+            .'</a>'
+            : (isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey))
         .'</th>';
     }
     
@@ -186,6 +217,7 @@ abstract class AyaXhtmlTableCell {
             //$mValue = $this->columnRound($mValue, &$col);
     //        $mValue = $this->columnFormat($mValue);
             //$mValue = $this->columnUnit($mValue);
+            $mValue = $this->columnUnit($mValue);
         }
         
         return '<td>'.$mValue.'</td>';

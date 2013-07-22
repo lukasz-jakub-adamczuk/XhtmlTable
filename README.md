@@ -27,7 +27,9 @@ $oTable->render();
 
 ## TODO
 
+* sorting headers ✓
 * modifiers (to change cell content)
 * policies (to display table depending by privileges)
 * caches (to store parsed config)
 * accessibility
+
