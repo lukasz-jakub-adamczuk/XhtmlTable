@@ -182,10 +182,30 @@ thead tr:hover {
 }
 
 /* tfoot */
+tfoot tr {
+    _background: rgba(110, 110, 110, .1);
+}
 tfoot td {
-    border-top: 1px solid #888;
+    border: 0;
+    border-top: 1px solid #aaa;
     font-weight: bold;
     font-size: 1.5em;
+}
+
+/* tbody */
+tbody tr:nth-child(odd),
+.odd {
+    background-color: #fff;
+    background: rgba(255, 255, 255, .5);
+}
+tbody tr:nth-child(even),
+.even {
+    background-color: #f8f8f8;
+    background: rgba(240, 240, 240, .5);
+    _opacity: .5;
+}
+tbody tr:hover {
+    background: #ffa;
 }
 
 /* rows */
@@ -193,16 +213,8 @@ tr {
 	_background: url(../img/layout/opacity-90-bg.png) 0 0 repeat;
     _background: rgba(0, 0, 0, .5);
 }
-tr:hover {
-	background: #ffa;
-}
 
-.odd {
-    background-color: #fff;
-}
-.even {
-    background-color: #f8f8f8;
-}
+
 
 .checked {
     background-color: #ff8;
@@ -318,8 +330,10 @@ th a:hover {
 
 td {
     padding: 4px;
-    _border: 1px solid #eee;
-    _border-color: #ddd #eee;
+    border: 1px solid #eee;
+    _border-color: #fff #eee;
+    border-width: 0 1px;
+    _border-width: 1px 0;
 }
 td.sorted {
 	background: #eee;

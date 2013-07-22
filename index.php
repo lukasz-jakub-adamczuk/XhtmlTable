@@ -1,9 +1,9 @@
 <?php
 
 $start = microtime(true);
-//for ($i = 0; $i < 10000000; ++$i) {
+for ($i = 0; $i < 10000000; ++$i) {
     // do something
-//}
+}
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -70,8 +70,10 @@ echo '<head>';
 echo '<meta charset="utf-8" />';
 echo '<title>Title of the document</title>';
 
+echo '<link type="text/css" rel="stylesheet" href="tables.css" />';
+
 echo '<style>';
-echo file_get_contents(ROOT_DIR . '/tables.css');
+//echo file_get_contents(ROOT_DIR . '/tables.css');
 echo '</style>';
 echo '</head>';
 
@@ -83,7 +85,7 @@ echo '</div>';
 echo $oTable->render();
 
 $total = microtime(true) - $start;
-echo $total;
+echo (int)($total * 1000).'ms';
 
 echo '</body>';
 
