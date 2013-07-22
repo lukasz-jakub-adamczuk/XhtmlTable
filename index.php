@@ -1,9 +1,9 @@
 <?php
 
 $start = microtime(true);
-for ($i = 0; $i < 10000000; ++$i) {
+//for ($i = 0; $i < 10000000; ++$i) {
     // do something
-}
+//}
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -40,9 +40,9 @@ if (!file_exists($file)) {
 }
 $aDataset = AyaYamlLoader::parse($file);
 
-$file = ROOT_DIR . '/langs/pl/common.yml';
+//$file = ROOT_DIR . '/langs/pl/common.yml';
 $aTexts = AyaYamlLoader::parse($file);
-
+//
 $file = ROOT_DIR . '/langs/pl/my-example.yml';
 $aLocalTexts = AyaYamlLoader::parse($file);
 

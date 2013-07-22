@@ -269,8 +269,7 @@ th.sorted a:hover {
 th a:after {
     float: right;
     content: '';
-    _border: 8px solid #eee;
-    border: 8px solid transparent;
+    border: 6px solid transparent;
 }
 th .asc:after,
 th a[href$=desc]:hover:after {
