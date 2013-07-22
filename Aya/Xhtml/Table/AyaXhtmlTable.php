@@ -38,6 +38,7 @@ class AyaXhtmlTable {
         foreach ($aConfig['cols'] as $cols => $col) {
             $sCellType = (isset($col['type']) ? $col['type'] : 'text');
             $aClasses[$sCellType] = 'AyaXhtmlTableCell'.ucfirst($sCellType);
+            //$aNames[$cols] = 'AyaXhtmlTableCell'.ucfirst($sCellType);
         }
         
         // including required classes
@@ -199,6 +200,13 @@ class AyaXhtmlTable {
         // html table code
         $s = '<table class="'.$this->_columnsAlignment().'" summary="'.$this->_sTableSummary.'">';
         $s .= '<caption>'.$this->_sTableCaption.'</caption>';
+        // cols
+        foreach ($this->_aCells as $cols => $cell) {
+            if ($cell->isVisible()) {
+                $s .= '<col'.($cols == 'title' ? ' class="selected"' : '').' />';
+            }
+        }
+        
         // thead
         $s .= '<thead>';
             $s .= '<tr>';

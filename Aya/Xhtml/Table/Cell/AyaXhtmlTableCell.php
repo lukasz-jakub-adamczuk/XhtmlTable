@@ -158,6 +158,7 @@ abstract class AyaXhtmlTableCell {
     /* renders */
     
     public function renderHeadCell() {
+        $sPreLink = 'delete-me';
         return '<th id="'.$this->_sKey.'"'
         .(isset($this->_sWidth)
             ? ' width="'.$this->_sWidth.'"'
@@ -169,16 +170,20 @@ abstract class AyaXhtmlTableCell {
             ? ' class="'.(isset($this->_sClass)
                 ? $this->_sClass
                 : '')
-            .(isset($this->_sAlign)
-                ? (' ta'.substr($this->_sAlign, 0, 1))
-                : '')
-            .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
-                ? ' sorted '.$aNavigator['sort_dir']
+            //.(isset($this->_sAlign)
+              //  ? (' ta'.substr($this->_sAlign, 0, 1))
+                //: '')
+            //.(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
+            //    ? ' sorted '.$aNavigator['sort_dir']
+            //    : '')
+            .($this->_sKey == 'title'
+                ? ' sorted asc'
                 : '')
             .'"'
             : '')
         .'>'
-        .($this->_bSortable && isset($this->_sAxis)
+        //.($this->_bSortable && isset($this->_sAxis)
+        .(rand(0,1)
             ? '<a href="'.$sPreLink.$this->_sSortLink
             .'/'
             .(isset($this->_sAxis)
@@ -190,21 +195,21 @@ abstract class AyaXhtmlTableCell {
                     : '/asc')
                 : (isset($aNavigator['sort_dir']) && $aNavigator['sort_dir'] == 'desc'
                     ? '/desc'
-                    : '/asc'))
+                    : (rand(0,1) ? '/asc' : '/desc')))
             .'"'
             .' title="'
-            .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
+            /*.(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
                 ? ($aNavigator['sort_dir'] == 'asc'
                     ? $this->_aTexts['common']['sort']['desc']
                     : $this->_aTexts['common']['sort']['asc'])
                 : (isset($aNavigator['sort_dir']) && $aNavigator['sort_dir'] == 'desc'
                     ? $this->_aTexts['common']['sort']['desc']
-                    : $this->_aTexts['common']['sort']['asc']))
+                    : $this->_aTexts['common']['sort']['asc']))*/
             .'"'
             .'>'
             .(isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey)
             .'</a>'
-            : (isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey))
+            : '<span>'.(isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey).'</span>')
         .'</th>';
     }
     
@@ -217,7 +222,7 @@ abstract class AyaXhtmlTableCell {
             //$mValue = $this->columnRound($mValue, &$col);
     //        $mValue = $this->columnFormat($mValue);
             //$mValue = $this->columnUnit($mValue);
-            $mValue = $this->columnUnit($mValue);
+            $mValue = $this->columnElement($mValue);
         }
         
         return '<td>'.$mValue.'</td>';

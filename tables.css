@@ -147,7 +147,7 @@ table .unit {
 table {
     width: 100%;
     font-size: .75em;
-    border-collapse: inherit;
+    border-collapse: collapse;
     border-spacing: 0;
 }
 table input,
@@ -162,9 +162,15 @@ caption {
     background: #eee;
     caption-side: bottom;
 }
+/* cols */
+col {
+    border-color: #aaa;
+    border-width: 0 1px;
+}
 col.selected {
     border-bottom: 1px solid #ccc;
-    background: #000;
+    _background: #000;
+    background: rgba(0, 0, 0, .1);
 }
 
 /* thead */
@@ -184,7 +190,8 @@ tfoot td {
 
 /* rows */
 tr {
-	background: url(../img/layout/opacity-90-bg.png) 0 0 repeat;
+	_background: url(../img/layout/opacity-90-bg.png) 0 0 repeat;
+    _background: rgba(0, 0, 0, .5);
 }
 tr:hover {
 	background: #ffa;
@@ -234,7 +241,7 @@ tr:hover {
 
 /* cells */
 th {
-    padding: 5px 4px;
+    _padding: 5px 4px;
     text-align: left;
 }
 th:hover {
@@ -247,6 +254,26 @@ th.sorted a:hover {
 	background: none;
 }
 
+th a:after {
+    float: right;
+    content: '';
+    _border: 8px solid #eee;
+    border: 8px solid transparent;
+}
+th .asc:after,
+th a[href$=desc]:hover:after {
+    margin-top: 4px;
+    border-top: 0;
+    border-bottom: 8px solid #000;
+}
+th .desc:after,
+th a[href$=asc]:hover:after {
+    margin-top: 4px;
+    border-top: 8px solid #000;
+    border-bottom: 0;
+}
+
+/*
 th.asc,
 th.desc {
     padding-right: 24px;
@@ -259,10 +286,15 @@ th.asc {
 }
 th.desc {
     background-image: url(../img/layout/arrow-down.png);
-}
+}*/
 th a {
 	display: block;
+
     color: #333;
+}
+th a,
+th span {
+    padding: 5px 4px;
 }
 /*
 th a[href$="asc"]:hover {
@@ -286,7 +318,8 @@ th a:hover {
 
 td {
     padding: 4px;
-    border-bottom: 1px solid #eee;
+    _border: 1px solid #eee;
+    _border-color: #ddd #eee;
 }
 td.sorted {
 	background: #eee;
