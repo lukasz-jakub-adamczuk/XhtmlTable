@@ -16,7 +16,7 @@ class AyaXhtmlTableCellLink extends AyaXhtmlTableCell {
     
     public function columnElement($mValue, &$aRow = null) {
         // przygotowanie linka
-        $sLink = (defined('LOCAL_URL') ? LOCAL_URL : '');
+        echo $sLink = (defined('LOCAL_URL') ? LOCAL_URL : '');
         if (isset($this->_sLink)) {
             if (is_array($this->_sLink)) {
                 foreach ($this->_sLink as $k => $v) {

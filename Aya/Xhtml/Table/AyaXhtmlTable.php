@@ -21,6 +21,8 @@ class AyaXhtmlTable {
     private $_sTableCaption = '';
     
     private $_sTableSummary = '';
+    
+    private $_sTableSortLink = '';
 
     private $_sTableDateFormat = 'm-d-Y';
     
@@ -78,8 +80,11 @@ class AyaXhtmlTable {
         }
     }
     
-    public function assign($aDataset) {
+    public function assign($aDataset, $aNavigator = null) {
         $this->_aDataset = $aDataset;
+        if ($aNavigator) {
+            $this->_aNavigator = $aNavigator;
+        }
     }
 
     // specific texts overrides values from basic texts
@@ -173,6 +178,14 @@ class AyaXhtmlTable {
         return $sAlignment;
     }
     
+    /* setters */
+    
+    public function setSortLink($sSortLink) {
+        $this->_sTableSortLink = $sSortLink;
+    }
+    
+    /* renders */
+    
     public function renderTotal($aCols = null) {
         $aCols = $aCols ? $aCols : $this->_aCols;
         $iRows = count($this->_aDataset);
@@ -197,7 +210,7 @@ class AyaXhtmlTable {
             $this->renderTotal($this->_aTotal['conf']);
         }
         
-        // html table code
+        // table
         $s = '<table class="'.$this->_columnsAlignment().'" summary="'.$this->_sTableSummary.'">';
         $s .= '<caption>'.$this->_sTableCaption.'</caption>';
         // cols
@@ -206,13 +219,13 @@ class AyaXhtmlTable {
                 $s .= '<col'.($cols == 'title' ? ' class="selected"' : '').' />';
             }
         }
-        
         // thead
         $s .= '<thead>';
             $s .= '<tr>';
             foreach ($this->_aCells as $cell) {
                 if ($cell->isVisible()) {
-                    $s .= $cell->renderHeadCell();
+                    $sPreLink = defined('LOCAL_URL') ? LOCAL_URL : '';
+                    $s .= $cell->renderHeadCell($this->_aNavigator, $sPreLink.$this->_sTableSortLink);
                 }
             }
             $s .= '</tr>';

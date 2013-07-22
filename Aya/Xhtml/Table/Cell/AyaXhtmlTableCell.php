@@ -50,7 +50,7 @@ abstract class AyaXhtmlTableCell {
         if (isset($_aParams['value'])) {
             $this->_sValue = $aParams['value'];
         } else {
-            $this->_sValue = $this->_sKey;
+            $this->_sValue = str_replace('-', '_', $sKey);
         }
         
         if ($this->_bSortable) {
@@ -157,8 +157,7 @@ abstract class AyaXhtmlTableCell {
     
     /* renders */
     
-    public function renderHeadCell() {
-        $sPreLink = 'delete-me';
+    public function renderHeadCell($aNavigator, $sPreLink = '') {
         return '<th id="'.$this->_sKey.'"'
         .(isset($this->_sWidth)
             ? ' width="'.$this->_sWidth.'"'
@@ -173,29 +172,30 @@ abstract class AyaXhtmlTableCell {
             //.(isset($this->_sAlign)
               //  ? (' ta'.substr($this->_sAlign, 0, 1))
                 //: '')
-            //.(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
-            //    ? ' sorted '.$aNavigator['sort_dir']
-            //    : '')
-            .($this->_sKey == 'title'
-                ? ' sorted asc'
+            .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
+                ? ' sorted '.$aNavigator['sort_dir']
                 : '')
             .'"'
             : '')
         .'>'
-        //.($this->_bSortable && isset($this->_sAxis)
-        .(rand(0,1)
-            ? '<a href="'.$sPreLink.$this->_sSortLink
+        .($this->_bSortable && isset($this->_sAxis)
+            ? '<a href="'.$sPreLink.'/sort'.$this->_sSortLink
             .'/'
             .(isset($this->_sAxis)
                 ? $this->_sAxis
                 : $this->_sKey)
-            .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
-                ? ($aNavigator['sort_dir'] == 'asc'
+            .(isset($aNavigator['sort']) && ($aNavigator['sort'] === $this->_sKey || $aNavigator['sort'] === $this->_sAxis)
+                ? ($aNavigator['order'] == 'asc'
                     ? '/desc'
                     : '/asc')
-                : (isset($aNavigator['sort_dir']) && $aNavigator['sort_dir'] == 'desc'
+                : (isset($aNavigator['order']) && $aNavigator['order'] == 'desc'
                     ? '/desc'
-                    : (rand(0,1) ? '/asc' : '/desc')))
+                    : '/asc'))
+            .'"'
+            .' class="'
+            .(isset($aNavigator['sort']) && ($aNavigator['sort'] === $this->_sKey || $aNavigator['sort'] === $this->_sAxis)
+                ? ''.$aNavigator['order']
+                : '')
             .'"'
             .' title="'
             /*.(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
