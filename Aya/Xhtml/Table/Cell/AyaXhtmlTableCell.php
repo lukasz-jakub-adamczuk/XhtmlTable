@@ -54,7 +54,7 @@ abstract class AyaXhtmlTableCell {
         }
         
         if ($this->_bSortable) {
-            $this->_sAxis = $this->_sValue;
+            $this->_sAxis = str_replace('_', '-', $this->_sValue);
         }
         
         // default values (if not comes from params)
