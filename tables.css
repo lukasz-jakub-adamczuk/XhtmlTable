@@ -274,14 +274,14 @@ th a:after {
 th .asc:after,
 th a[href$=desc]:hover:after {
     margin-top: 4px;
-    border-top: 0;
-    border-bottom: 8px solid #000;
+    border-top: 8px solid #000;
+    border-bottom: 0;
 }
 th .desc:after,
 th a[href$=asc]:hover:after {
     margin-top: 4px;
-    border-top: 8px solid #000;
-    border-bottom: 0;
+    border-top: 0;
+    border-bottom: 8px solid #000;
 }
 
 /*

@@ -16,6 +16,8 @@ class AyaXhtmlTable {
 
     private $_aTexts;
     
+    private $_aNavigator = array();
+    
     private $_sLang = 'pl';
     
     private $_sTableCaption = '';
