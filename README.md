@@ -33,3 +33,4 @@ $oTable->render();
 * caches (to store parsed config)
 * accessibility
 
+going back to edition
