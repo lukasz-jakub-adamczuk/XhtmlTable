@@ -14,12 +14,12 @@ abstract class AyaXhtmlTableCell {
     
     protected $_sTotal;
 
-    protected $_aTexts;
+    protected $_aTexts = array();
     
     protected $_sAxis;
     
     // cell attrs
-    protected $_sSortLink;
+    protected $_sBaseLink;
     
     protected $_sWidth;
     
@@ -54,7 +54,7 @@ abstract class AyaXhtmlTableCell {
         }
         
         if ($this->_bSortable) {
-            $this->_sAxis = $this->_sValue;
+            $this->_sAxis = str_replace('_', '-', $this->_sValue);
         }
         
         // default values (if not comes from params)
@@ -95,6 +95,7 @@ abstract class AyaXhtmlTableCell {
 
     public function translate($aTexts, $sKey = null) {
         if ($sKey) {
+//            var_dump($this->_aTexts);
             $this->_aTexts[$sKey] = $aTexts;
         } else {
             $this->_aTexts = $aTexts;
@@ -113,6 +114,10 @@ abstract class AyaXhtmlTableCell {
     
     public function setClass($sClass) {
         $this->_sClass = $sClass;
+    }
+
+    public function setBaseLink($sBaseLink) {
+        $this->_sBaseLink = $sBaseLink;
     }
     
     /* getters */
@@ -158,6 +163,9 @@ abstract class AyaXhtmlTableCell {
     /* renders */
     
     public function renderHeadCell($aNavigator, $sPreLink = '') {
+        if ($sPreLink) {
+            $this->_sBaseLink = $sPreLink;
+        }
         return '<th id="'.$this->_sKey.'"'
         .(isset($this->_sWidth)
             ? ' width="'.$this->_sWidth.'"'
@@ -173,13 +181,13 @@ abstract class AyaXhtmlTableCell {
               //  ? (' ta'.substr($this->_sAlign, 0, 1))
                 //: '')
             .(isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)
-                ? ' sorted '.$aNavigator['sort_dir']
+                ? ' sorted '.$aNavigator['order']
                 : '')
             .'"'
             : '')
         .'>'
         .($this->_bSortable && isset($this->_sAxis)
-            ? '<a href="'.$sPreLink.'/sort'.$this->_sSortLink
+            ? '<a href="'.$sPreLink.'/sort'.$this->_sBaseLink
             .'/'
             .(isset($this->_sAxis)
                 ? $this->_sAxis
@@ -207,9 +215,9 @@ abstract class AyaXhtmlTableCell {
                     : $this->_aTexts['common']['sort']['asc']))*/
             .'"'
             .'>'
-            .(isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey)
+            .(isset($this->_aTexts['cols']['name']) ? $this->_aTexts['cols']['name'] : $this->_sKey)
             .'</a>'
-            : '<span>'.(isset($this->_aTexts['name']) ? $this->_aTexts['name'] : $this->_sKey).'</span>')
+            : '<span>'.(isset($this->_aTexts['cols']['name']) ? $this->_aTexts['cols']['name'] : $this->_sKey).'</span>')
         .'</th>';
     }
     

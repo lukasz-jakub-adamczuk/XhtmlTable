@@ -4,7 +4,7 @@ class AyaXhtmlTableCellDate extends AyaXhtmlTableCell {
 
     protected function _beforeConfigure() {
         $this->_sAlign = 'center';
-        //$this->_sFormat = 'd-m-Y';
+        $this->_sFormat = 'd-m-Y';
     }
 
     /* column operations */
