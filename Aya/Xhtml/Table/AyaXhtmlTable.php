@@ -46,6 +46,8 @@ class AyaXhtmlTable {
 			$aClasses[$sCellType] = 'AyaXhtmlTableCell'.ucfirst($sCellType);
 			//$aNames[$cols] = 'AyaXhtmlTableCell'.ucfirst($sCellType);
 		}
+
+		// print_r($aClasses);
 		
 		// including required classes
 		foreach ($aClasses as $sCellName) {
@@ -233,8 +235,11 @@ class AyaXhtmlTable {
 			foreach ($this->_aCells as $cell) {
 				if ($cell->isVisible()) {
 					// $sPreLink = defined('LOCAL_URL') ? LOCAL_URL : '';
+					// echo $this->_sTableSortLink;
+					
+					$s .= $cell->renderHeadCell($this->_aNavigator, $this->_sTableSortLink);
 					$cell->setBaseLink($this->_sTableBaseLink);
-					$s .= $cell->renderHeadCell($this->_aNavigator, $this->_sTableBaseLink);
+					// $s .= $this->_sTableSortLink;
 				}
 			}
 			$s .= '</tr>';

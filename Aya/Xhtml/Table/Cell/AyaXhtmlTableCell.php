@@ -61,7 +61,7 @@ abstract class AyaXhtmlTableCell {
         $this->_beforeConfigure();
         
         // set all what comes from params
-        if (isset($aParams)) {
+        if (is_array($aParams)) {
             foreach ($aParams as $params => $param) {
                 $this->set($params, $param);
             }
@@ -153,7 +153,7 @@ abstract class AyaXhtmlTableCell {
     }
     
     public function columnEscape($mValue) {
-        return $this->_bEscape ? htmlspecialchars($mValue) : $mValue;
+        return $this->_bEscape ? htmlspecialchars(stripslashes($mValue)) : $mValue;
     }
 
     public function columnElement($mValue, &$aRow = null) {
@@ -163,9 +163,9 @@ abstract class AyaXhtmlTableCell {
     /* renders */
     
     public function renderHeadCell($aNavigator, $sPreLink = '') {
-        if ($sPreLink) {
-            $this->_sBaseLink = $sPreLink;
-        }
+        // if ($sPreLink) {
+        //     $this->_sBaseLink = $sPreLink;
+        // }
         return '<th id="'.$this->_sKey.'"'
         .(isset($this->_sWidth)
             ? ' width="'.$this->_sWidth.'"'

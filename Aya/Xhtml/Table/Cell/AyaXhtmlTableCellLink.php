@@ -36,6 +36,7 @@ class AyaXhtmlTableCellLink extends AyaXhtmlTableCell {
         //if ($this->_sIdLink) {
         //    $sLink .= (isset($aRow[$this->_sIdLink]) ? $aRow[$this->_sIdLink] : $this->_sIdLink);
         //}
+
         return '<a href="'.$sLink.'">'.$mValue.'</a>';
         /*
     	if (isset($this->_sLink)) {
