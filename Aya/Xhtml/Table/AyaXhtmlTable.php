@@ -260,7 +260,11 @@ class AyaXhtmlTable {
 		$s .= '<tbody>';
 		$i = 1; // internal counter
 		foreach ($this->_aDataset as $rows => $row) {
-			$s .= '<tr>';
+			/*if ($row['deleted'] == '1') {
+				$s .= '<tr class="deleted">';
+			} else {
+				$s .= '<tr>';
+			}*/
 			foreach ($this->_aCells as $cell) {
 				if ($cell->isVisible()) {
 					$s .= $cell->render($row, $i);
