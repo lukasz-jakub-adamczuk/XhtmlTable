@@ -27,8 +27,11 @@ class AyaXhtmlTableCellLink extends AyaXhtmlTableCell {
 				$sLink .= $this->_sLink;
 			}
 		}
+		$sClass = $this->_sClass ? ' class="'.$this->_sClass.'"' : '';
 
-		return '<a href="'.$sLink.'">'.$mValue.'</a>';
+		$mValue = isset($this->_aTexts['values'][$mValue]) ? $this->_aTexts['values'][$mValue] : $mValue;
+
+		return '<a href="'.$sLink.'"'.$sClass.'>'.$mValue.'</a>';
 	}
 	
 }

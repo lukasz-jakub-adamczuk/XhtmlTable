@@ -20,9 +20,9 @@ class AyaXhtmlTableCellTag extends AyaXhtmlTableCell {
         if (isset($this->_aTags)) {
             if (isset($this->_aTags[$mValue])) {
                 if (isset($this->_aTexts['values'][$mValue])) {
-                    return '<span class="tag-'.$this->_aTags[$mValue].'"'.$sTitle.'>'.$this->_aTexts['values'][$mValue].'</span>';
+                    return '<span class="tag-'.$this->_aTags[$mValue].(isset($this->_sClass[$mValue]) ? ' '.$this->_sClass[$mValue] : '').'"'.$sTitle.'>'.$this->_aTexts['values'][$mValue].'</span>';
                 } else {
-                    return '<span class="tag-'.$this->_aTags[$mValue].'"'.$sTitle.'>'.$mValue.'</span>';
+                    return '<span class="tag-'.$this->_aTags[$mValue].(isset($this->_sClass[$mValue]) ? ' '.$this->_sClass[$mValue] : '').'"'.$sTitle.'>'.$mValue.'</span>';
                 }
             } else {
                 return $mValue;

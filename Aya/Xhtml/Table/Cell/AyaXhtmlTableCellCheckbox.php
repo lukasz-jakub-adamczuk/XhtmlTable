@@ -16,7 +16,9 @@ class AyaXhtmlTableCellCheckbox extends AyaXhtmlTableCell {
             $sTitle = '';
         }
 
-        return '<input type="checkbox" name="ids[]" value="'.$mValue.'" />';
+        $sClass = $this->_sClass ? ' class="'.$this->_sClass.'"' : '';
+
+        return '<input type="checkbox" name="ids[]" value="'.$mValue.'"'.$sClass.' />';
     }
 
 }

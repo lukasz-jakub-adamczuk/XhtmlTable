@@ -97,6 +97,7 @@ class AyaXhtmlTable {
 	public function translate($aBasicTexts, $aSpecificTexts = null) {
 		// setting basic texts
 		$this->_aTexts = $aBasicTexts;
+		// print_r($aBasicTexts);
 		// overrides basic by specific
 		if ($aSpecificTexts) {
 			//$this->_aTexts = $this->_overrideTexts($aSpecificTexts);
@@ -113,7 +114,7 @@ class AyaXhtmlTable {
 
 		// TODO cache manager
 		// all what is need cache and use next time
-		//print_r($this->_aTexts);
+		// print_r($this->_aTexts);
 
 		// column texts
 		// TODO could be moved to private method
@@ -122,9 +123,9 @@ class AyaXhtmlTable {
 			if (isset($this->_aTexts['cols'][$ck])) {
 				$cell->translate($this->_aTexts['cols'][$ck], 'cols');
 			}
-			/*if (isset($this->_aTexts['values'])) {
-				$cell->translate($this->_aTexts['values'], 'values');
-			}
+			if (isset($this->_aTexts['values'][$ck])) {
+				$cell->translate($this->_aTexts['values'][$ck], 'values');
+			}/*
 			if (isset($this->_aTexts['titles'])) {
 				$cell->translate($this->_aTexts['titles'], 'titles');
 			}*/
@@ -221,7 +222,7 @@ class AyaXhtmlTable {
 		}
 		
 		// table
-		$s = '<table class="'.$this->_columnsAlignment().'" summary="'.$this->_sTableSummary.'">';
+		$s = '<table class="table '.$this->_columnsAlignment().'" summary="'.$this->_sTableSummary.'">';
 		$s .= '<caption>'.$this->_sTableCaption.'</caption>';
 		// cols
 		foreach ($this->_aCells as $cols => $cell) {

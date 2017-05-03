@@ -136,7 +136,13 @@ abstract class AyaXhtmlTableCell {
 				return $aRow[$sKey]; 
 			}
 		} else {*/
-			if (isset($aRow[$this->_sValue])) {
+			if (is_array($this->_sValue)) {
+				$sValue = '';
+				foreach ($this->_sValue as $item) {
+					$sValue .= isset($aRow[$item]) ? $aRow[$item] : $item;
+				}
+				return $sValue;
+			} elseif (isset($aRow[$this->_sValue])) {
 				return $aRow[$this->_sValue]; 
 			} else {
 				return $this->_sValue;
@@ -169,9 +175,9 @@ abstract class AyaXhtmlTableCell {
 		$sWidth = (isset($this->_sWidth) ? ' width="'.$this->_sWidth.'"' : '');
 		
 		$aClasses = array();
-		if (isset($this->_sClass)) {
-			$aClasses[] = $this->_sClass;
-		}
+		// if (isset($this->_sClass)) {
+		// 	$aClasses[] = $this->_sClass;
+		// }
 		if (isset($aNavigator['sort']) && ($aNavigator['sort'] == $this->_sKey || $aNavigator['sort'] == $this->_sAxis)) {
 			$aClasses[] = 'sorted';
 			$aClasses[] = $aNavigator['order'];
