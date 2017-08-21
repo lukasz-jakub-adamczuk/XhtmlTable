@@ -225,11 +225,13 @@ class AyaXhtmlTable {
 		$s = '<table class="table '.$this->_columnsAlignment().'" summary="'.$this->_sTableSummary.'">';
 		$s .= '<caption>'.$this->_sTableCaption.'</caption>';
 		// cols
+		// $s .= '<colgroup>';
 		foreach ($this->_aCells as $cols => $cell) {
 			if ($cell->isVisible()) {
 				$s .= '<col'.($cols == 'title' ? ' class="selected"' : '').' />';
 			}
 		}
+		// $s .= '</colgroup>';
 		// thead
 		$s .= '<thead>';
 			$s .= '<tr>';
@@ -266,6 +268,7 @@ class AyaXhtmlTable {
 			} else {
 				$s .= '<tr>';
 			}*/
+			$s .= '<tr>';
 			foreach ($this->_aCells as $cell) {
 				if ($cell->isVisible()) {
 					$s .= $cell->render($row, $i);
